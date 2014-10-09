@@ -1,0 +1,28 @@
+    - name: create user(s)
+      action: user name={{item}} comment="{{users[item].real_name}}" shell=/bin/bash
+      with_items: active_users
+
+    - name: setup authorized key(s)
+      authorized_key: user={{item}} key="{{ lookup('file', user_management_ssh_keys_path ~ users[item].public_key ) }}"
+      with_items: active_users
+      when: users[item].public_key is defined
+
+    - name: setup additional authorized key(s)
+      authorized_key: user={{item}} key="{{ lookup('file', user_management_ssh_keys_path ~ users[item].additional_public_key ) }}"
+      with_items: active_users
+      when: users[item].additional_public_key is defined
+
+    - name: Create groups
+      group: name={{item}} state=present
+      with_items:
+          server_groups
+
+    - name: setup additional groups for users
+      user: name={{ item.name }} groups={{ item.groups }} append=yes
+      with_items: user_groups
+      when: user_groups is defined
+
+    - name: remove old authorized_key(s) from active users
+      authorized_key: user={{item}} key="{{ lookup('file', user_management_ssh_keys_path ~ users[item].old_public_key ) }}" state=absent
+      with_items: active_users
+      when: users[item].old_public_key is defined

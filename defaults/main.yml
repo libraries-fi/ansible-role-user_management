@@ -1,0 +1,5 @@
+---
+PLAYBOOK_PRIVATE_ROLE_ASSETS_PATH: "{{playbook_dir}}/assets/private/roles"
+user_management_chown_removed: false
+user_management_ssh_keys_path: "{{PLAYBOOK_PRIVATE_ROLE_ASSETS_PATH}}/user_management/public_keys/"
+server_groups: []
