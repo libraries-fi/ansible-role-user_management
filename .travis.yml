@@ -3,7 +3,7 @@ language: python
 python: "2.7"
 
 env:
-  - SITE=test.yml
+  - INVENTORY=tests/inventory
 
 before_install:
   - sudo apt-get update -qq
@@ -14,12 +14,5 @@ a
   # Add ansible.cfg to pick up roles path.
   - "printf '[defaults]\nroles_path = ../' > ansible.cfg"
 
-script:
-  - "ansible-playbook -i tests/inventory tests/$SITE --syntax-check"
-  - "ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo"
-  # Rerun for idempotency check.
-  - >
-    ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo
-    | grep -q 'changed=0.*failed=0'
-    && (echo 'Idempotence test: pass' && exit 0)
-    || (echo 'Idempotence test: fail' && exit 1)
+before_script: ln -s $TRAVIS_BUILD_DIR ajsalminen.user_management
+script: ./tests/test.sh
