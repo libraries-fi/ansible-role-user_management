@@ -10,9 +10,9 @@ before_install:
 
 install:
   - pip install ansible
-a
+
   # Add ansible.cfg to pick up roles path.
   - "printf '[defaults]\nroles_path = ../' > ansible.cfg"
 
-before_script: ln -s $TRAVIS_BUILD_DIR ajsalminen.user_management
+before_script: ln -s $TRAVIS_BUILD_DIR ../ajsalminen.user_management
 script: ./tests/test.sh
