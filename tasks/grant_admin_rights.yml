@@ -1,9 +1,9 @@
     # The git group in use on some servers is not in Ansible yet so only append.
     - name: set groups for admin(s)
-      action: user
-      name: "{{ item }}"
-      groups: "{{ user_management_admin_groups }}"
-      append: yes
+      user:
+        name: "{{ item }}"
+        groups: "{{ user_management_admin_groups }}"
+        append: yes
       with_items: user_management_active_admins
 
     - name: setup authorized key(s) for root
