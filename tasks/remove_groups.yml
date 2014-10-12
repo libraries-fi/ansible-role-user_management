@@ -4,6 +4,7 @@
   action: shell /usr/bin/getent passwd {{item}} | /usr/bin/wc -l | tr -d ' '
   register: group_exist
   with_items: user_management_removed_users
+  changed_when: false
 
 - name: Find and chown all files owned by the removed group(s)
   command: "chown -R --from=:{{item.item}} :root /"
