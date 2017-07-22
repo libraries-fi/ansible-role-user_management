@@ -23,3 +23,8 @@
 
     - name: Install package sudo
       action: apt pkg=sudo state=present
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+    - name: Install package sudo
+      action: dnf name=sudo state=present
+      when: ansible_distribution == 'Fedora' or ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
