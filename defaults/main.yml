@@ -4,3 +4,8 @@ user_management_chown_removed: false
 user_management_ssh_keys_path: "{{ PLAYBOOK_PRIVATE_ROLE_ASSETS_PATH }}/user_management/public_keys/"
 user_management_admin_groups: adm,sudo
 user_management_server_groups: []
+user_management_active_admins: []
+user_management_active_users: []
+user_management_removed_users: []
+user_management_locked_users: []
+removed_groups: []

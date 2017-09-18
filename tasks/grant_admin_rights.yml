@@ -4,20 +4,20 @@
         name: "{{ item }}"
         groups: "{{ user_management_admin_groups }}"
         append: yes
-      with_items: user_management_active_admins
+      with_items: "{{ user_management_active_admins }}"
 
     - name: setup authorized key(s) for root
       authorized_key:
         user: root
         key: "{{ lookup('file', user_management_ssh_keys_path ~ user_management_users[item].public_key ) }}"
-      with_items: user_management_active_admins
+      with_items: "{{ user_management_active_admins }}"
       when: user_management_users[item].public_key is defined
 
     - name: setup additional authorized key(s) for root
       authorized_key:
         user: root
         key: "{{ lookup('file', user_management_ssh_keys_path ~ user_management_users[item].additional_public_key ) }}"
-      with_items: user_management_active_users
+      with_items: "{{ user_management_active_users }}"
       when: user_management_users[item].additional_public_key is defined
 
 
