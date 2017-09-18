@@ -20,11 +20,7 @@
       with_items: "{{ user_management_active_users }}"
       when: user_management_users[item].additional_public_key is defined
 
-
     - name: Install package sudo
-      action: apt pkg=sudo state=present
-      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-
-    - name: Install package sudo
-      action: dnf name=sudo state=present
-      when: ansible_distribution == 'Fedora' or ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+      package:
+        name: sudo
+        state: present
