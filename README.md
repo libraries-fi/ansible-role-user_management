@@ -23,7 +23,8 @@ A list of user accounts that should be active on
 the server.
 
 `user_management_removed_users:`
-A list of user accounts that should be removed.
+A list of dictionaries which represent user accounts that should be
+removed.
 
 `user_management_active_admins:`
 A  list of admin users.
@@ -56,10 +57,16 @@ each server.
             snowden:
               real_name: Edward Snowden
               public_key: test_id_rsa.pub
+            alice:
+              real_name: Alice
+              public_key: alice_id_rsa.pub
           user_management_active_users:
             - snowden
           user_management_active_admins:
             - snowden
+          user_management_removed_users:
+            - name: alice
+              remove: yes
 
 License
 -------
