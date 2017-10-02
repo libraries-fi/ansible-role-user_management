@@ -31,7 +31,6 @@
         groups: "{{ item.groups }}"
         append: yes
       with_items: "{{ user_groups }}"
-      when: user_groups is defined
 
     - name: remove old authorized_key(s) from active users
       authorized_key:
