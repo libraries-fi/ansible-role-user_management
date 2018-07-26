@@ -4,6 +4,7 @@
       action: shell /usr/bin/getent passwd {{ item.name }} | /usr/bin/wc -l | tr -d ' '
       register: user_exist
       with_items: "{{ user_management_removed_users }}"
+      check_mode: no
       changed_when: False
 
     - name: Find and chown all files owned by the removed user
