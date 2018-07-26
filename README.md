@@ -1,9 +1,6 @@
 User management
 =========
 
-[![Build Status](https://travis-ci.org/ajsalminen/ansible-role-user_management.svg?branch=master)](https://travis-ci.org/ajsalminen/ansible-role-user_management)
-
-
 This role manages user accounts and groups on a server.
 
 Role Variables
@@ -52,7 +49,7 @@ each server.
 
     - hosts: servers
       roles:
-        - role: ajsalminen.user_management
+        - role: libraries-fi.user_management
           user_management_users:
             snowden:
               real_name: Edward Snowden
